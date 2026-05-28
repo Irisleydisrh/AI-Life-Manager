@@ -1,0 +1,81 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ai-life-postgres
+    environment:
+      POSTGRES_DB: ai_life_manager
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d ai_life_manager"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: ai-life-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ai-life-backend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: secret
+      DB_NAME: ai_life_manager
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: minimum-32-char-secret-key-here-development
+      JWT_EXPIRES_IN: 15m
+      JWT_REFRESH_SECRET: another-32-char-secret-key-for-refresh-token
+      JWT_REFRESH_EXPIRES_IN: 30d
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-sk-placeholder}
+      OPENAI_MODEL: gpt-4o
+      AI_MAX_TOKENS: 1000
+      ALLOWED_ORIGINS: "*"
+      MAX_FILE_SIZE: 5242880
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/uploads:/app/uploads
+    restart: unless-stopped
+
+  # Adminer for database management (optional)
+  adminer:
+    image: adminer
+    container_name: ai-life-adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:

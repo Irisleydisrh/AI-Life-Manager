@@ -1,0 +1,55 @@
+# === Backend (Node.js) ===
+backend/node_modules/
+backend/.env
+backend/.env.local
+backend/npm-debug.log*
+backend/yarn-debug.log*
+backend/yarn-error.log*
+
+# === Flutter / Dart ===
+mobile/build/
+mobile/.dart_tool/
+mobile/.packages
+mobile/.pub-cache/
+mobile/.pub/
+mobile/pubspec.lock
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/ios/Flutter/Flutter.framework
+mobile/ios/Flutter/Flutter.podspec
+mobile/.idea/
+mobile/.android/
+mobile/.ios/
+
+# === Android ===
+mobile/android/.gradle/
+mobile/android/local.properties
+mobile/android/key.properties
+mobile/android/app/build/
+*.hprof
+
+# === IDE ===
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# === OS ===
+.DS_Store
+Thumbs.db
+*.log
+
+# === APK generados ===
+*.apk
+!mobile/build/app/outputs/flutter-apk/*.apk
+
+# === Logs ===
+*.log
+backend/logs/
+
+# === Test files ===
+test-connection.html
+test-login.json

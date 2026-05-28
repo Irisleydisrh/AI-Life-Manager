@@ -1,0 +1,9 @@
+@echo off
+cd /d "%~dp0backend"
+echo Starting backend server...
+start "Backend" cmd /k "node src\index.js"
+echo Backend starting in new window...
+echo.
+echo Waiting 5 seconds for backend to initialize...
+timeout /t 5 /nobreak >nul
+echo Done!

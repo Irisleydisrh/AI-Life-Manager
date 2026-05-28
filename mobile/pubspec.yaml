@@ -1,0 +1,56 @@
+name: ai_life_manager
+description: AI Life Manager - Flutter Mobile App
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # State Management
+  flutter_bloc: ^8.1.4
+  equatable: ^2.0.5
+  
+  # Navigation
+  go_router: ^13.2.0
+  
+  # HTTP & API
+  dio: ^5.4.0
+  
+  # Local Storage
+  flutter_secure_storage: ^9.0.0
+  hive_flutter: ^1.1.0
+  
+  # UI
+  flutter_animate: ^4.5.0
+  fl_chart: ^0.67.0
+  flutter_slidable: ^3.0.1
+  shimmer: ^3.0.0
+  cached_network_image: ^3.3.1
+  image_picker: ^1.0.7
+  lottie: ^2.7.0
+  
+  # Utils
+  intl: ^0.19.0
+  uuid: ^4.3.3
+  connectivity_plus: ^6.0.2
+  shared_preferences: ^2.2.2
+  
+  # Icons
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.8
+  hive_generator: ^2.0.1
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/animations/
